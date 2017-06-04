@@ -1,8 +1,5 @@
 package com.cts.mail.service;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -28,11 +25,11 @@ public class MailClientService {
 	 * @param message
 	 * @return
 	 */
-	public String prepareAndSend(String toEmail, String fromEmail, String subject, String message) {
+	public String prepareAndSend(String toEmail, String subject, String message) {
 
 		MimeMessagePreparator messagePreparator = mimeMessage -> {
 			MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
-			messageHelper.setFrom(fromEmail);
+			//messageHelper.setFrom(fromEmail);
 			messageHelper.setTo(toEmail);
 			messageHelper.setSubject(subject);
 			String content = mailContentBuilder.build(message);
@@ -43,6 +40,7 @@ public class MailClientService {
 			mailSender.send(messagePreparator);
 			return "{\"message\": \"OK\"}";
 		} catch (MailException e) {
+			e.printStackTrace();
 			return "{\"message\": \"Error\"}";
 		}
 

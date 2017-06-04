@@ -20,18 +20,16 @@ public class EmailTriggerController {
 
 	/**
 	 * @param toEmail
-	 * @param fromEmail
 	 * @param subject
 	 * @param message
 	 * @return
 	 */
-	@RequestMapping(path = "/email/trigger", method = RequestMethod.POST, produces = { "application/json",
+	@RequestMapping(path = "/trigger", method = RequestMethod.POST, produces = { "application/json",
 			"application/xml" })
 	public String triggerEmail(@RequestParam(value = "toEmail", required = true) String toEmail,
-			@RequestParam(value = "fromEmail", required = true) String fromEmail,
 			@RequestParam(value = "subject") String subject, @RequestParam(value = "message") String message) {
 
-		String result = mailClientService.prepareAndSend(toEmail, fromEmail, subject, message);
+		String result = mailClientService.prepareAndSend(toEmail, subject, message);
 		return result;
 
 	}
