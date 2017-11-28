@@ -1,0 +1,7 @@
+---
+applications:
+- name: mailsender
+  memory: 1G
+  random-route: true
+  path: target/mailsender.jar
+
